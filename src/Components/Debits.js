@@ -6,10 +6,13 @@ export default class Debits extends Component {
   }
 
   componentDidMount(){
+
     console.log(this.props.debits)
   }
 
-
+  
+  // this.props.addCreditsArray(description, amount, date)
+  //use ^^^^^ to add new items to the list
   render() {
     return (
     <div>

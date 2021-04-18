@@ -16,38 +16,37 @@ class App extends Component {
         userName: "joe_shmo",
         memberSince: "07/23/96",
       },
-      credits: null,
-      debits: null,
+      credits: [],
+      debits: [],
     };
   }
 
+  //run the api calls
   componentDidMount() {
     this.handleGetCredits();
     this.handleGetDebits();
   }
 
+  //This API Call gets the Credits
   handleGetCredits = async () => {
     await fetch(`https://moj-api.herokuapp.com/credits`)
       .then((res) => res.json())
       .then((json) => {
-        console.log("credits run good");
         this.setState({ credits: json });
       })
       .catch((err) => {
-        console.log(err);
         return 0;
       });
   };
 
+  //This API Call gets the Debits
   handleGetDebits = async () => {
     await fetch(`https://moj-api.herokuapp.com/debits`)
       .then((res) => res.json())
       .then((json) => {
-        console.log("debits run good");
         this.setState({ debits: json });
       })
       .catch((err) => {
-        console.log(err);
         return 0;
       });
   };
@@ -58,8 +57,24 @@ class App extends Component {
     this.setState({ currentUser: newUser });
   };
 
+  //function to add to this.state.credit array
+  addCreditsArray = (description, amount, date) => {
+    var tempobj = { description: description, amount: amount, date: date };
+
+    this.state.credits.push(tempobj);
+  };
+
+    //function to add to this.state.debit array
+  addDebitsArray = (description, amount, date) => {
+    var tempobj = { description: description, amount: amount, date: date };
+
+    this.state.debits.push(tempobj);
+  };
+
   render() {
-    const HomeComponent = () => <Home />;
+    const HomeComponent = () => (
+      <Home accountBalance={this.state.accountBalance} />
+    );
 
     const UserProfileComponent = () => (
       <UserProfile
@@ -76,6 +91,7 @@ class App extends Component {
       <Debits
         accountBalance={this.state.accountBalance}
         debits={this.state.debits}
+        addDebitsArray={this.addDebitsArray}
       />
     );
 
@@ -83,6 +99,7 @@ class App extends Component {
       <Credits
         accountBalance={this.state.accountBalance}
         credits={this.state.credits}
+        addCreditsArray={this.addCreditsArray}
       />
     );
 
