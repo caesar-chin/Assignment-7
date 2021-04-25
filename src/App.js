@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './Components/Home';
-import UserProfile from './Components/UserProfile';
-import LogIn from './Components/LogIn';
-import Debits from './Components/Debits';
-import Credits from './Components/Credits';
-import styles from './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./Components/Home";
+import UserProfile from "./Components/UserProfile";
+import LogIn from "./Components/LogIn";
+import Debits from "./Components/Debits";
+import Credits from "./Components/Credits";
+import styles from "./App.css";
 
 class App extends Component {
   constructor() {
@@ -14,8 +14,8 @@ class App extends Component {
     this.state = {
       accountBalance: 0,
       currentUser: {
-        userName: 'joe_shmo',
-        memberSince: '07/23/96',
+        userName: "joe_shmo",
+        memberSince: "07/23/96",
       },
       credits: [],
       debits: [],
@@ -29,8 +29,8 @@ class App extends Component {
     this.handleCalculateNewBalance();
   }
 
-  handleCalculateNewBalance = () => {
-    let newAccountBalance = this.state.accountBalance;
+  handleCalculateNewBalance = async () => {
+    let newAccountBalance = 0;
     this.state.debits.forEach((transaction) => {
       newAccountBalance -= transaction.amount;
       //console.log('Each debit transaction amount:' + transaction.amount);
@@ -40,7 +40,7 @@ class App extends Component {
       //console.log('Each credit transaction amount:' + transaction.amount);
     });
 
-    this.setState({ accountBalance: newAccountBalance });
+    await this.setState({ accountBalance: newAccountBalance.toFixed(2) });
   };
 
   //This API Call gets the Credits
@@ -106,6 +106,7 @@ class App extends Component {
         accountBalance={this.state.accountBalance}
         debits={this.state.debits}
         addDebitsArray={this.addDebitsArray}
+        handleCalculateNewBalance={this.handleCalculateNewBalance}
       />
     );
 
@@ -114,6 +115,7 @@ class App extends Component {
         accountBalance={this.state.accountBalance}
         credits={this.state.credits}
         addCreditsArray={this.addCreditsArray}
+        handleCalculateNewBalance={this.handleCalculateNewBalance}
       />
     );
 
@@ -121,11 +123,11 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path='/' render={HomeComponent} />
-            <Route exact path='/userProfile' render={UserProfileComponent} />
-            <Route exact path='/login' render={LogInComponent} />
-            <Route exact path='/debits' render={DebitsComponent} />
-            <Route exact path='/credits' render={CreditsComponent} />
+            <Route exact path="/" render={HomeComponent} />
+            <Route exact path="/userProfile" render={UserProfileComponent} />
+            <Route exact path="/login" render={LogInComponent} />
+            <Route exact path="/debits" render={DebitsComponent} />
+            <Route exact path="/credits" render={CreditsComponent} />
           </Switch>
         </div>
       </Router>
