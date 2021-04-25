@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./Components/Home";
-import UserProfile from "./Components/UserProfile";
-import LogIn from "./Components/LogIn";
-import Debits from "./Components/Debits";
-import Credits from "./Components/Credits";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Components/Home';
+import UserProfile from './Components/UserProfile';
+import LogIn from './Components/LogIn';
+import Debits from './Components/Debits';
+import Credits from './Components/Credits';
 
 class App extends Component {
   constructor() {
@@ -13,8 +13,8 @@ class App extends Component {
     this.state = {
       accountBalance: 14568.27,
       currentUser: {
-        userName: "joe_shmo",
-        memberSince: "07/23/96",
+        userName: 'joe_shmo',
+        memberSince: '07/23/96',
       },
       credits: [],
       debits: [],
@@ -25,7 +25,19 @@ class App extends Component {
   componentDidMount() {
     this.handleGetCredits();
     this.handleGetDebits();
+    this.handleCalculateNewBalance();
   }
+
+  handleCalculateNewBalance = () => {
+    let accountBalance = this.state.accountBalance;
+    this.state.debits.forEach((transaction) => {
+      accountBalance -= transaction.amount;
+    });
+    this.state.credits.forEach((transaction) => {
+      accountBalance += transaction.amount;
+    });
+    this.setState({ accountBalance: accountBalance });
+  };
 
   //This API Call gets the Credits
   handleGetCredits = async () => {
@@ -39,7 +51,7 @@ class App extends Component {
       });
   };
 
-  //This API Call gets the Debits
+  // This API Call gets the Debits
   handleGetDebits = async () => {
     await fetch(`https://moj-api.herokuapp.com/debits`)
       .then((res) => res.json())
@@ -57,17 +69,15 @@ class App extends Component {
     this.setState({ currentUser: newUser });
   };
 
-  //function to add to this.state.credit array
+  // function to add to this.state.credit array
   addCreditsArray = (description, amount, date) => {
     var tempobj = { description: description, amount: amount, date: date };
-
     this.state.credits.push(tempobj);
   };
 
-    //function to add to this.state.debit array
+  // function to add to this.state.debit array
   addDebitsArray = (description, amount, date) => {
     var tempobj = { description: description, amount: amount, date: date };
-
     this.state.debits.push(tempobj);
   };
 
@@ -106,11 +116,11 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={HomeComponent} />
-          <Route exact path="/userProfile" render={UserProfileComponent} />
-          <Route exact path="/login" render={LogInComponent} />
-          <Route exact path="/debits" render={DebitsComponent} />
-          <Route exact path="/credits" render={CreditsComponent} />
+          <Route exact path='/' render={HomeComponent} />
+          <Route exact path='/userProfile' render={UserProfileComponent} />
+          <Route exact path='/login' render={LogInComponent} />
+          <Route exact path='/debits' render={DebitsComponent} />
+          <Route exact path='/credits' render={CreditsComponent} />
         </Switch>
       </Router>
     );
