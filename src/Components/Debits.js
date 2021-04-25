@@ -9,7 +9,6 @@ export default class Debits extends Component {
   render() {
     let accountBalance = this.props.accountBalance;
     let debitTransactions = this.props.debits;
-    this.props.addDebitsArray('high', 4230, 1 / 1 / 2021);
     return (
       <div>
         <h1>Debits</h1>

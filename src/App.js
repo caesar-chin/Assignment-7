@@ -11,7 +11,7 @@ class App extends Component {
     super();
 
     this.state = {
-      accountBalance: 14568.27,
+      accountBalance: 0,
       currentUser: {
         userName: 'joe_shmo',
         memberSince: '07/23/96',
@@ -22,21 +22,24 @@ class App extends Component {
   }
 
   //run the api calls
-  componentDidMount() {
-    this.handleGetCredits();
-    this.handleGetDebits();
+  async componentDidMount() {
+    await this.handleGetCredits();
+    await this.handleGetDebits();
     this.handleCalculateNewBalance();
   }
 
   handleCalculateNewBalance = () => {
-    let accountBalance = this.state.accountBalance;
+    let newAccountBalance = this.state.accountBalance;
     this.state.debits.forEach((transaction) => {
-      accountBalance -= transaction.amount;
+      newAccountBalance -= transaction.amount;
+      //console.log('Each debit transaction amount:' + transaction.amount);
     });
     this.state.credits.forEach((transaction) => {
-      accountBalance += transaction.amount;
+      newAccountBalance += transaction.amount;
+      //console.log('Each credit transaction amount:' + transaction.amount);
     });
-    this.setState({ accountBalance: accountBalance });
+
+    this.setState({ accountBalance: newAccountBalance });
   };
 
   //This API Call gets the Credits
