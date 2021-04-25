@@ -1,23 +1,33 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class Debits extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    console.log(this.props.debits);
   }
 
-  componentDidMount(){
-
-    console.log(this.props.debits)
-  }
-
-  
-  // this.props.addCreditsArray(description, amount, date)
-  //use ^^^^^ to add new items to the list
+  //use ' this.props.addCreditsArray(description, amount, date) ' to add new items to the list
   render() {
+    let accountBalance = this.props.accountBalance;
+    let debitTransactions = this.props.debits;
     return (
-    <div>
-
-    </div>
-    )
+      <div>
+        <h1>Debits</h1>
+        <div>
+          {debitTransactions.map((transaction, index) => {
+            return (
+              <ul key={index}>
+                <li>
+                  {transaction.description} - {transaction.amount} -
+                  {transaction.date}
+                </li>
+              </ul>
+            );
+          })}
+        </div>
+        <h4>
+          AccountBalance: <p>{accountBalance}</p>
+        </h4>
+      </div>
+    );
   }
 }
