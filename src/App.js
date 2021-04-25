@@ -5,6 +5,7 @@ import UserProfile from './Components/UserProfile';
 import LogIn from './Components/LogIn';
 import Debits from './Components/Debits';
 import Credits from './Components/Credits';
+import styles from './App.css';
 
 class App extends Component {
   constructor() {
@@ -118,13 +119,15 @@ class App extends Component {
 
     return (
       <Router>
-        <Switch>
-          <Route exact path='/' render={HomeComponent} />
-          <Route exact path='/userProfile' render={UserProfileComponent} />
-          <Route exact path='/login' render={LogInComponent} />
-          <Route exact path='/debits' render={DebitsComponent} />
-          <Route exact path='/credits' render={CreditsComponent} />
-        </Switch>
+        <div>
+          <Switch>
+            <Route exact path='/' render={HomeComponent} />
+            <Route exact path='/userProfile' render={UserProfileComponent} />
+            <Route exact path='/login' render={LogInComponent} />
+            <Route exact path='/debits' render={DebitsComponent} />
+            <Route exact path='/credits' render={CreditsComponent} />
+          </Switch>
+        </div>
       </Router>
     );
   }
