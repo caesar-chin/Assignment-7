@@ -73,10 +73,19 @@ class App extends Component {
     this.setState({ currentUser: newUser });
   };
 
+  addNewCredit = (amount) => {
+    let newAccountBalance = this.state.accountBalance;
+    amount = parseInt(amount);
+    newAccountBalance = newAccountBalance + amount;
+    this.setState({accountBalance: newAccountBalance});
+  }
+
   // function to add to this.state.credit array
   addCreditsArray = (description, amount, date) => {
     var tempobj = { description: description, amount: amount, date: date };
     this.state.credits.push(tempobj);
+    this.addNewCredit(amount);
+  
   };
 
   // function to add to this.state.debit array
