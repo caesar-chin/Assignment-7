@@ -37,3 +37,10 @@ ul {
   border-radius: 25px;
   background-color: #7e9a9a;
 }
+
+.bankimg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 8px solid #f6d8ac;
+}
