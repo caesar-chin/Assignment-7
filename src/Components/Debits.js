@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./debitCreditStyles.css";
+import styles from "./debitCreditStyles.module.css";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 export default class Debits extends Component {
@@ -30,7 +30,7 @@ export default class Debits extends Component {
     );
 
     this.props.handleCalculateNewBalance();
-    
+
     this.setState({
       accountBalance: this.props.accountBalance,
       debitTransactions: this.props.debits,
@@ -43,12 +43,12 @@ export default class Debits extends Component {
     let debitTransactions = this.state.debitTransactions;
     return (
       <div>
-        <h1 className="type-header">Debits</h1>
+        <h1 className={styles.headers}>Debits</h1>
         <div className="transactions-list">
           {debitTransactions.map((transaction, index) => {
             return (
               <ul key={index}>
-                <li>
+                <li className={styles.debits}>
                   <b>Name:</b> {transaction.description} <b>Cost:</b>{" "}
                   {transaction.amount} <b>Date:</b> {transaction.date}
                 </li>

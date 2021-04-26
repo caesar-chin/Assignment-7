@@ -1,0 +1,39 @@
+.headers {
+  text-align: center;
+  color: #db9833;
+}
+
+.transactions-list {
+  display: block;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+.account-balance-header {
+  text-align: center;
+  color: red;
+}
+
+.account-balance-text {
+  color: chocolate;
+  font-size: 1.2rem;
+}
+
+.credits {
+  margin: 15px;
+  padding: 30px;
+  border: 2px solid #f6d8ac;
+  border-radius: 25px;
+  background-color: #7e9a9a;
+}
+
+.debits {
+  margin: 15px;
+  padding: 30px;
+  border: 2px solid #f6d8ac;
+  border-radius: 25px;
+  background-color: #7e9a9a;
+}

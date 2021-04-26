@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./debitCreditStyles.css";
+import styles from "./debitCreditStyles.module.css";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 export default class Credits extends Component {
@@ -43,12 +43,12 @@ export default class Credits extends Component {
     let creditTransactions = this.state.creditTransactions;
     return (
       <div>
-        <h1 className="type-header">Credits</h1>
+        <h1 className={styles.headers}>Credits</h1>
         <div className="transactions-list">
           {creditTransactions.map((transaction, index) => {
             return (
               <ul key={index}>
-                <li>
+                <li className={styles.credits}>
                   <b>Name:</b> {transaction.description} <b>Cost:</b>{" "}
                   {transaction.amount} <b>Date:</b> {transaction.date}
                 </li>
