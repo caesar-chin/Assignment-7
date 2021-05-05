@@ -1,4 +1,4 @@
-# https://bank-of-react-assignment7.netlify.app/
+# https://bankofreact.netlify.app
 
 # Getting Started with Create React App
 
